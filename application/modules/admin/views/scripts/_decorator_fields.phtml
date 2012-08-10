@@ -1,0 +1,62 @@
+<?php if( $this->openOnly ) : ?>
+<div class="portlet">
+	<div class="portlet-header">
+		<h3><?php echo $this->title ?></h3>
+	</div>
+	<div class="portlet-inside">
+		<?php 
+		// get custom fields content
+		$id = (int) $this->element->getValue();
+		$db = Zend_Registry::get('db');
+		$fields = Model_Content::GetProfiles($db, $id);
+		?>
+		<!-- table custom fields -->
+		<table id="custom_fields" class="table <?php if( !$fields ) echo 'hide' ?>">
+			<thead>
+				<tr>
+					<th width="30%">Name</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if( $fields ) :
+					foreach( $fields as $field) : ?>
+					<tr>
+						<td>
+							<input type="text" value="<?php echo $field['profile_name']; ?>" disabled="disabled" />
+							<div class="control-group">
+								<button id="update-field" class="btn">Update</button>
+								<button id="delete-field" class="btn">Delete</button>
+							</div>
+						</td>
+						<td><textarea class="full" rows="2"><?php echo $field['profile_value'] ?></textarea></td>
+					</tr>
+					<?php endforeach; 
+				endif; ?>
+			</tbody>
+		</table>
+		
+		<p class="help-block"><b>Add new custom field :</b></p>
+		
+		<!-- table add field -->
+		<table id="new_fields" class="table">
+			<thead>
+				<tr>
+					<th width="30%">Name</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+<?php elseif( $this->closeOnly ) : ?>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button href="#" id="add-custom-field" class="btn">Add custom field</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<?php endif ?>

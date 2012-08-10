@@ -1,0 +1,21 @@
+<ul id="nav">
+	<li class="current">
+		<a href="<?php echo $this->baseUrl(false) ?>/">Home</a>
+	</li>
+	<?php foreach( $this->menus as $index => $menu ) : ?>
+		<?php if( $menu->content_slug != 'home' ) : ?>
+			<li <?php if( $index == 5 ) echo 'class="last"' ?>>
+				<a href="<?php echo $this->baseUrl(false).'/'.$menu->content_slug ?>"><?php echo $menu->content_name ?></a>
+				<?php if( $menu->hasChild() ) : ?>
+					<ul>
+						<?php foreach( $menu->getChild() as $child) : ?>
+							<li>
+								<a href="<?php echo $this->baseUrl(false).'/'. $menu->content_slug .'/'. $child->content_slug ?>"><?php echo $child->content_name ?></a>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
+			</li>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</ul>

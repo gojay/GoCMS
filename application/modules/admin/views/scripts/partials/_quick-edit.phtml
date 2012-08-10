@@ -1,0 +1,151 @@
+<!-- quick edit -->
+<table class="table table-condensed hide">
+	<tbody>
+		<tr id="inline-edit-post">
+			<!-- =================== Quick Editor Post =================== -->
+			<td colspan="3"><h4>Quick Edit <span class="post-edit-title"></span></h4>
+			<div class="row-fluid" style="margin:10px" >
+				<div class="span3">
+					<fieldset>
+						<?php
+						// title
+						$title = new Zend_Form_Element_Text('content_name');
+						$title->setLabel('Title')
+							  ->setDecorators(My_Form::$default_decorator);
+						echo $title;
+						// slug
+						$slug = new Zend_Form_Element_Text('content_slug');
+						$slug->addValidator('Int')
+							 ->setLabel('Slug')
+							 ->setDecorators(My_Form::$default_decorator);
+						echo $slug;
+						?>
+					</fieldset>
+				</div><!--/col 1-->
+				<div class="span5">
+					<fieldset>
+						<label class="control-label" for="content_tags">Categories</label>
+						<?php 
+						// populate categories
+						$db = Zend_Registry::get('db');
+						$cats = Model_Term::GetCategoriesForPopulate( $db );
+						$categories = new My_Form_Element_TreeView('content_categories');
+						$categories->setOptions(array(
+										'multioptions' => $cats
+									))
+								   ->setDecorators(array(
+										'ViewHelper', 
+										array( 'HtmlTag', array('tag' => 'div', 'id' => 'treecheckbox', 'class' => 'control-group') ),
+										array( array('row' => 'HtmlTag'), array('tag' => 'fieldset', 'openOnly' => true) )
+									));
+						echo $categories;
+						?>
+					</fieldset>
+				</div><!--/col 2-->
+				<div class="span4">
+					<fieldset>
+						<?php
+						// title
+						$title = new Zend_Form_Element_Textarea('content_tags');
+						$title->setLabel('Tags')
+							  ->setAttribs(array(
+								 'rows' => 2,
+								 'style' => 'width:90%'
+							  ))
+							  ->setDecorators(My_Form::$default_decorator);
+						echo $title;
+						// status : select
+						$status = new Zend_Form_Element_Select('content_status');
+						$status->setLabel('Status')
+							   ->setAttrib('style', 'width: 68%')
+							   ->addMultiOption('L', 'Publish')
+							   ->addMultiOption('D', 'Draft')
+							   ->setDecorators(My_Form::$default_decorator);
+						echo $status;
+						?>
+					</fieldset>
+				</div><!--/col 3-->
+			</div>
+			<div class="row-fluid" style="margin:10px 0" >
+				<div class="span10">
+					<a class="btn cancelEditor">Cancel</a>
+				</div>
+				<div class="span2 alignright">
+					<img src="<?php echo $this->baseUrl() ?>/images/ajax_spin.gif" class="ajax-loading hide" />
+					<a class="btn btn-primary saveEditor" type="submit">Update</a>
+				</div>
+			</div><!--/col control--></td>
+		</tr><!-- /inline edit post -->
+		
+		<tr id="inline-edit-page">
+			<!-- =================== Quick Editor Page =================== -->
+			<td colspan="4"><h4>Quick Edit <span class="post-edit-title"></span></h4>
+			<div class="row-fluid" style="margin:10px">
+				<div class="span6">
+					<fieldset>
+						<?php
+						// title
+						$title = new Zend_Form_Element_Text('content_name');
+						$title->setLabel('Title')
+							  ->setDecorators(My_Form::$default_decorator);
+						echo $title;
+						// slug
+						$slug = new Zend_Form_Element_Text('content_slug');
+						$slug->addValidator('Int')
+							 ->setLabel('Slug')
+							 ->setDecorators(My_Form::$default_decorator);
+						echo $slug;
+						?>
+					</fieldset>
+				</div><!--/col 1-->
+				<div class="span6">
+					<fieldset>
+						<?php
+						// parent : select
+						$parent = new Zend_Form_Element_Select('content_parent');
+						$parent->setLabel('Parent')
+							   ->setAttrib('class', 'half')
+							   ->addMultiOption(0, 'None')
+							   ->setDecorators(My_Form::$default_decorator);
+						$parents = Model_Content::GetContents( $db, array('type' => 'page', 'parent_in' => 0, 'order' => 'content_id') );
+						if($parents)
+						{
+							foreach($parents as $p)
+							{
+								$parent->addMultiOption($p->getId(), ucwords($p->content_name)); // tambahkan option kategori
+							}
+						}
+						echo $parent;
+						// status : select
+						$status = new Zend_Form_Element_Select('content_status');
+						$status->setLabel('Status')
+							   ->setAttrib('class', 'half')
+							   ->addMultiOption('L', 'Publish')
+							   ->addMultiOption('D', 'Draft')
+							   ->setDecorators(My_Form::$default_decorator);
+						echo $status;
+						// order : input
+						$order = new Zend_Form_Element_Text('content_order');
+						$order->setAttribs(array(
+								 'maxlength' => 1,
+								 'style' => 'width:5%'
+							 ))
+							 ->setLabel('Order')
+							 ->setDecorators(My_Form::$default_decorator);
+						echo $order;
+						?>
+					</fieldset>
+				</div<!--/col 2-->
+			</div>
+			<div class="row-fluid" style="margin:10px 0" >
+				<div class="span10">
+					<a class="btn cancelEditor">Cancel</a>
+				</div>
+				<div class="span2 alignright">
+					<img src="<?php echo $this->baseUrl() ?>/images/ajax_spin.gif" class="ajax-loading hide" />
+					<a class="btn btn-primary saveEditor" type="submit">Update</a>
+				</div>
+			</div><!--/col control--></td>
+		</tr><!-- /inline edit page -->
+	</tbody>
+</table><!-- /quick edit -->

@@ -1,0 +1,17 @@
+<h1 class="title bdr-btm">
+	<?php echo $this->page->content_name ?>
+</h1>
+<p>
+	<?php echo $this->page->content_description; ?>
+</p>
+<?php if( $this->page->hasChild() && $this->page->content_parent != 0 ) : ?>
+	<?php foreach( $this->page->getChild() as $child ) : ?>
+		<div class="txt">
+			<h2><?php echo $child->content_name ?></h2>
+			<?php 
+			$link = '...<a href="'.$this->url(array('name' => $child->content_slug), 'people').'" title="Detail'.$this->page->content_name.'">Read more</a>';
+			echo $this->getExcerptContent($child->content_description, $link, false); 
+			?>
+		</div>
+	<?php endforeach; ?>
+<?php endif; ?>

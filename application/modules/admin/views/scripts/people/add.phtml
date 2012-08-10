@@ -1,0 +1,19 @@
+<?php 
+// file javascript utk menangani ajax form
+$this->jQuery()->addJavascriptFile($this->baseUrl().'/js/admin/form.js');
+?>
+
+<header>
+	<h2>Add People</h2>
+</header>
+
+<section>
+<!-- messages -->
+<?php 
+echo $this->flashMessenger('success'); 
+echo $this->flashMessenger('error'); 
+?>		
+
+<!-- form -->
+<?php echo $this->form; ?>
+</section>

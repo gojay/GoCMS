@@ -1,0 +1,30 @@
+<?php
+if ($this->pageCount > 1) : ?>
+
+	<div id="button_page">
+			<ul>
+				<!-- PREVIOUS -->
+				<li>
+					<a href="<?php echo $this->url( array( 'action' => $this->action, 'page' => $this->previous ), 'pagination' ); ?>">&laquo;</a>
+				</li>
+				
+				<!-- NUMBERS -->
+				<?php foreach($this->pagesInRange as $page) : ?>
+				<li>
+					<a class="<?php if ($page != $this->current) : ?>tengah<?php endif; ?>" 
+						href="<?php echo $this->url( array( 'action' => $this->action, 'page' => $page ), 'pagination' ); ?>">
+						<?php echo $page; ?>
+					</a>
+				</li>		
+				<?php endforeach; ?>
+				
+				<!-- NEXT -->
+				<li>
+					<a href="<?php echo $this->url( array( 'action' => $this->action, 'page' => $this->next ), 'pagination' ); ?>">&gt;</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+
+<?php endif; ?>

@@ -1,0 +1,23 @@
+<?php 
+$this->jQuery()->setLocalPath($this->baseUrl(). '/js/jquery/jquery-1.7.1.min.js') // CDN: setVersion('1.7.1')
+	           ->setUiLocalPath($this->baseUrl(). '/js/jquery-ui/jquery-ui-1.8.18.custom.min.js') // CDN: setUiVersion('1.8.18')
+	           ->addStylesheet($this->baseUrl(). '/js/jquery-ui/css/lightness/jquery-ui-1.8.18.custom.css')
+	           ->addJavascriptFile( $this->baseUrl() . '/js/tiny_mce/tiny_mce.js')
+			   ->addJavascriptFile( $this->baseUrl() . '/js/admin/editor.js')
+			   ->addOnLoad(' Editor.init({ baseUrl:"'.$this->baseUrl().'" }); '); 
+	
+// messages			
+echo $this->flashMessenger('success');
+echo $this->flashMessenger('error');
+?>
+
+<h2><?php echo $this->getTitle(); ?></h2>
+
+<div class="page" style="margin-top: 20px">
+	<?php echo $this->form; ?>
+</div>
+
+<?php echo $this->partial('partials/_modal.phtml', array(
+	'id' => 'modalImage', 
+	'attribs' => 'style=width:650px;'
+)) ?>

@@ -1,0 +1,16 @@
+<fieldset id="address-<?php echo $this->id ?>">
+	<legend>Office <?php echo $this->id ?></legend>
+	<div id="remove-element" style="float:right; margin-top:-60px; margin-right: -30px">
+		<a id="address-<?php echo $this->id ?>" href="#" 
+			title="Remove office" rel="tooltip" style="cursor:pointer;"> 
+			<img src="<?php echo $this->baseUrl() ?>/css/admin/img/close.png" style="border: none;"/> 
+		</a>
+	</div>
+	<div id="form-element">
+		<?php
+		foreach ($this->fields as $field) {
+			echo $field;
+		}
+		?>
+	</div>
+</fieldset>

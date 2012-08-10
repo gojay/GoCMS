@@ -1,0 +1,122 @@
+<?php 
+$this->jQuery()->addJavascriptFile($this->baseUrl() . '/js/admin/widgets.js')
+			   ->addJavascriptFile($this->baseUrl() . '/js/jquery.equalHeight.js')
+			   ->addOnLoad("
+					 $('.portlet-content').equalHeight();
+					 //$('.widgets-column').equalHeight();
+					 
+					 TheWidgets.ajaxurl = '".$this->baseUrl(false)."/admin/ajax/widget';
+					 TheWidgets.init();
+				");
+?>
+
+<h2>Widgets</h2>
+
+<?php 
+// messages
+echo $this->flashMessenger('success'); 
+echo $this->flashMessenger('error'); 
+?>
+
+<div id="widgets">
+
+	<!-- Available Widget -->
+	<div id="widgets-left" class="span8 portlet widgets-column">
+		<div class="portlet-header">
+			<h3>Available Widgets
+				<span id="removing-widget" style="display: none;">
+					Deactivate
+					<span></span>
+				</span>
+			</h3>
+		</div>
+		<div class="portlet-inside" style="display: block;">
+			<div id="available-widget" class="widget-holder">	
+				<div class="info">
+					<?php echo $this->translate("Drag widgets from here to a sidebar on the right to activate them. 
+					Drag widgets back here to deactivate them and delete their settings.") ?>
+				</div>
+				<?php 
+				/* =================
+				 * AVAILABLE SIDEBAR
+				 * =================
+				 */
+				if( $this->availablewidgets ) : ?>
+					<?php 
+					/**
+					 * looping available sidebar
+					 */
+					foreach($this->availablewidgets as $widget) 
+					{
+						/**
+						 * variabel count : jumlah widget value + 1
+						 * untuk multi widget
+						 * set value $count pada input tipe hidden class multi
+						 */
+						$count = count($widget['data']) + 1; 
+						echo $this->partial('partials/loop-widget.phtml', array(
+											'widget' => $widget,
+											'widget_id' => $widget['id'],
+											'forAvailable' => true,
+											'multiCount' => $count
+						)); 
+					} 
+					?>
+				<?php endif; ?>
+			</div> <!-- /available widget -->
+		</div>	
+	</div>	
+
+	<!-- Register Widget -->
+	<div id="widgets-right" class="span4 widgets-column">
+		
+		<?php foreach( $this->registerwidgets as $widget_title => $widget_data ) : ?>
+			<div class="widget-holder-wrap portlet">
+				<div class="portlet-header">
+					<h3>
+						<?php 
+						// buat title header
+						list( $w, $n ) = explode('_', $widget_title, 2);
+						$title = str_replace('_', ' ', $n);
+						echo ucwords($title); 						
+						?>
+						<span>
+							<img class="ajax-loader-widget" src="<?php echo $this->baseUrl() ?>/images/ajax_spin.gif"/>
+						</span>
+					</h3>
+				</div>
+				<div class="portlet-inside" style="display: block;">
+					<div id="<?php echo $widget_title ?>" class="widgets-sortables">
+					<?php 
+					foreach( $widget_data as $register_widget ) 
+					{ 
+						/**
+						 * pisahkan value "-" : [nama_widget]-[posisi_widget]
+						 * partial widget : [nama_widget] sbg ARRAY KEY dari widgets
+						 * partial pos : [posisi_widget]
+						 */
+						list($widget_name, $widget_position) = explode('-', $register_widget);
+						/**
+						 * widget id : preffix.id-pos
+						 * example : widget_1-1	
+						 */
+						$widget_id = sprintf('widget_%d-%d', $widget['id'], $this->widget_position); 
+						// widget
+						$widget = $this->availablewidgets[$widget_name];
+						// widget value = widget data index position
+						$widget_value = $this->availablewidgets[$widget_name]['data'][$widget_position]; 
+						echo $this->partial('partials/loop-widget.phtml', array(
+									'widget' => $widget,
+									'widget_id' => $widget_id,
+									'widget_value' => $widget_value,
+						)); 
+					} 
+					?>
+					</div>
+				</div>	
+			</div>	
+		<?php endforeach; ?>
+		
+	</div>	
+	
+</div>	

@@ -1,0 +1,53 @@
+	<div class="portlet">
+		<div class="portlet-header">
+			<h4><?php echo ( $this->page ) ? $this->page->content_name : ucwords($this->menu['label']) ; ?></h4>
+			<h5><?php 
+			if( !$this->parent ) echo 'sub ';
+			echo ( $this->page ) ? 'Page' : 'Link' ?>
+			</h5>
+		</div>
+		<div class="portlet-inside well hide">
+			<div class="portlet-form">
+				<div class="row">
+					<div class="inline">
+						<label>Navigation Label</label>
+						<input type="text" name="label[<?php if($this->id) echo $this->id; ?>]" value="<?php echo $this->menu['label']; ?>" />
+					</div>
+					<div class="inline">
+						<label>Navigation Title</label>
+						<input type="text" name="title[<?php if($this->id) echo $this->id; ?>]" value="<?php echo $this->menu['title']; ?>" />
+					</div>
+					<?php if( $this->menu['uri'] ) : ?>
+					<div class="single">
+						<label>URL</label>
+						<input type="text" name="url[<?php if($this->id) echo $this->id; ?>]" value="<?php echo $this->menu['uri']; ?>" />
+					</div>
+					<?php else : ?>
+						<?php if( $this->page->isFrontPage() ) : ?>
+							<div class="single">
+								<label>FRONT PAGE</label>
+							</div>
+						<?php else: ?>
+							<div class="single">
+								<label>URL : </label>
+								<?php 
+								$route = $this->menu['route'];
+								$uri = ( $route == 'page') ? $this->page->content_slug : $route . '/' .$this->page->content_slug;
+								$uri = $this->baseUrl(false) . '/' . $uri;
+								?>
+								<a href="<?php echo $uri; ?>"><?php echo $uri; ?></a>
+							</div>
+						<?php endif; ?>
+					<?php endif; ?>
+				</div>
+						
+				<div class="row">
+					<div class="alignleft" style="margin-top: 10px;">
+						<a class="menu-control-remove" href="#remove">Remove</a>&nbsp;|&nbsp; 
+						<a class="menu-control-close" href="#close">Close</a>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>

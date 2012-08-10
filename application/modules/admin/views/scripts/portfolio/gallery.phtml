@@ -1,0 +1,23 @@
+<?php
+$this->headLink()
+     ->appendStylesheet('http://blueimp.github.com/cdn/css/bootstrap.min.css')
+     ->appendStylesheet('http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css')
+     ->appendStylesheet('http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css');
+	 
+$this->jQuery()->enable()
+	 ->addStylesheet($this->baseUrl().'/css/blueimp/jquery.fileupload-ui.css');
+?>
+<header>
+	<h2><?php echo sprintf('Add gallery for "%s"', $this->portfolio->content_name); ?></h2>
+</header>
+
+<section>
+	<div class="span9">
+		<form id="fileupload" method="post" enctype="multipart/form-data" 
+			  action="<?php echo $this->url(array("controller"=>"blueimp", "action"=>"index", "id" => $this->portfolio->getId())) ?>">
+			
+			<?php echo $this->partial('partials/blueimp-multiple-upload.phtml', array('data' => $this->data)) ?>
+			
+		</form>
+	</div>
+</section>

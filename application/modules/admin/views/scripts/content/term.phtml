@@ -1,0 +1,49 @@
+<?php 
+$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/admin/quick-edit-term.js')
+			   ->addOnLoad(' QuickEdit.init({ ajaxurl:"'. $this->baseUrl( FALSE ).'/admin/ajax/term" }); '); 
+?>
+
+<h2><?php echo $this->getTitle(); ?></h2>
+
+<div id="term" style="margin-top: 20px">
+	<div id="editor_term" class="span4">
+		<?php echo $this->form ?>
+	</div>
+	<div id="table_term" class="span8">
+		<table class="table table-condensed table-striped" style="margin:10px 0;">
+		<thead>
+			<tr class="well">
+				<th></th>
+				<th>Name</th>
+				<th style="width: 30%">Description</th>
+				<th>Slug</th>
+				<th class="center">Contents</th>
+				<th style="width:18%">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php 
+			if( $this->paginator ) :
+				foreach($this->paginator as $term) 
+				{
+					echo $this->partial('partials/loop-term.phtml', array('data' => $term['parent'])); 
+		
+					foreach($term['children'] as $child) {
+						echo $this->partial('partials/loop-term.phtml', array('data' => $child));
+					}
+				}
+				echo $this->paginationControl( $this->paginator, 'Sliding', 'partials/_pagination-control.phtml', array('route' => 'pagination_content')); 
+			else : ?>
+				<tr>
+					<td colspan="3">
+						<div class="alert alert-block">
+							<i class="icon-exclamation-sign"></i>
+							<strong>No data results</strong>
+						</div>
+					</td>
+				</tr>
+		<?php endif; ?>
+		</tbody>
+		</table>
+	</div>
+</div>

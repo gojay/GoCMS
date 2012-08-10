@@ -1,0 +1,15 @@
+<?php if( $this->pages ) :  // TAMBAH PAGE ?>
+	
+	<?php foreach( $this->pages as $page ) : ?>
+		<li id="page_<?php echo $page->getId(); ?>">
+			<?php echo $this->partial('partials/loop-menu-ajax.phtml', $page ); ?>
+		</li>
+	<?php endforeach; ?>
+	
+<?php elseif( $this->links ) : // TAMBAH PAGE LINK ?>
+	
+	<li id="page_<?php echo $this->links['content_id']; ?>">
+		<?php echo $this->partial('partials/loop-menu-ajax.phtml', $this->links ); ?>
+	</li>
+	
+<?php endif; ?>

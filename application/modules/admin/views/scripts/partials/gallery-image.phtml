@@ -1,0 +1,16 @@
+<li class="image-frame">
+	<img src="<?php echo $this->baseUrl() . '/uploads/thumbnail/' . $this->image ?>" 
+			 width="200px"
+			 alt="<?php echo $this->name ?>" title="Image <?php echo $this->name ?>" />
+	<ul class="image-actions">
+		<li class="zoom">
+			<a href="<?php echo $this->baseUrl() ?>/admin/gallery/edit/id/<?php echo $this->gallery_id ?>">Zoom</a>
+		</li>
+		<li class="edit">
+			<a href="<?php echo $this->baseUrl() ?>/admin/gallery/update/id/<?php echo $this->gallery_id ?>">Edit</a>
+		</li>
+		<li class="delete">
+			<a href="<?php echo $this->baseUrl() ?>/admin/gallery/delete/id/<?php echo $this->gallery_id ?>">Delete</a>
+		</li>
+	</ul>
+</li>

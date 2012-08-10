@@ -1,0 +1,11 @@
+<div class="content">
+	<div id="slider">
+		<div class="slides">
+			<div class="slides_container">
+				<?php foreach( $this->slides as $slide ) :  ?>
+				<img src="<?php echo $this -> baseUrl(); ?>/uploads/image/<?php echo $slide; ?>" width="954" height="342" alt="slide" />
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+</div>

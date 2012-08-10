@@ -1,0 +1,50 @@
+
+<?php if( $this->isSingle ) : ?> 
+	<!-- JQUERY NIVO SLIDER -->
+	<?php 
+	$this->headLink()->appendStylesheet( $this->baseUrl() . '/css/nivo-slider/themes/default/default.css' );
+	$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/front/jquery.nivo.slider.pack.js' )
+				   ->addOnLoad(" $('#slider_image').nivoSlider(); ");
+	?>
+	<!-- /JQUERY NIVO SLIDER -->
+	
+	<!-- slider gallery -->
+	<?php if( $this->page->images ) : ?>
+	<div id="slide-gallery">
+        <div id="nivoslider">
+            <div class="slider_wrapper theme-default">
+                <div class="ribbon"></div>
+                <div id="slider_image" class="nivoSlider">
+                	<?php foreach( $this->page->images as $image) : ?>
+                    	<img src="<?php echo $this->baseUrl() ?>/uploads/image/<?php echo $image->filename; ?>" 
+                    		 width="598" height="331" title="#caption_1"/>
+                    <?php endforeach; ?>
+                </div><!--- .slider_wrapper .slider_image --->
+            </div><!--- .slider_wrapper --->
+    </div><!--- #main_wrapper #slider --->
+    <?php endif; ?>
+    <!-- /slider gallery -->
+    
+    <!-- description portfolio -->
+    <div>
+    	<h2><?php echo ucwords($this->page->content_name); ?></h2>
+	    <?php echo $this->page->content_description; ?>
+	</div>
+    <!-- /description portfolio -->
+	
+<?php else : ?>
+
+	<?php echo $this->page->content_description; ?>
+
+	<?php if( $this->paginator ) : ?>
+		
+		<ul id="gallery">
+			<?php echo $this->partialLoop( 'partials/loop-portfolio.phtml', $this->paginator ); ?>
+		</ul>
+		
+		<?php echo $this->paginationControl( $this->paginator, 'Sliding', 
+														  'partials/pagination-control.phtml',
+														  array( 'action' => 'portfolio' ) ); ?>
+	<?php endif; ?>
+	
+<?php endif; ?>

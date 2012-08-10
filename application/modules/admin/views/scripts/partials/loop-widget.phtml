@@ -1,0 +1,114 @@
+<div id="<?php echo $this->widget_id; ?>" class="portlet">
+	<div class="portlet-header">
+		<h4><?php echo $this->widget['title']; ?>
+			<span class="widget-name"><?php if($this->widget_value['title']) echo ':'.$this->widget_value['title']; ?></span>
+		</h4>
+	</div>
+	<?php if( $this->forAvailable ) : // available widgets ?>
+	<div class="portlet-description" style="height:50px"><?php echo $this->widget['description']; ?></div>
+	<?php endif; ?>
+	<div class="portlet-inside hide">
+		<div class="portlet-form">
+			<form action="#">
+				<?php 
+				// decorators
+				$default_decorator = array(
+					'ViewHelper', 
+					array( 'Label', array('class' => 'control-label') ),
+					array( 'HtmlTag', array('tag' => 'div', 'class' => 'control-group') )
+				);
+				// title
+				$title = new Zend_Form_Element_Text('title');
+				$title->setLabel('Title :')
+					  ->setAttribs(array(
+						 'rows' => 2,
+						 'style' => 'width:90%'
+					  ))
+					  ->setValue($this->widget_value['title'])
+					  ->setDecorators($default_decorator);
+				// attributes
+				if( $attrbs = $this->widget['attrbs'] )
+				{
+					$type = $attrbs['type'];
+					switch ($attrbs['element']) {
+						// attribut input text	
+						case 'text':
+							$label = ( $type == 'count' ) ? 'Number of '.$widget['title'].' to show : ' : $attrbs['label'];
+							$text = new Zend_Form_Element_Text('value');
+							$text->setLabel($label)
+					  		     ->setValue($this->widget_value['value'])
+							  	 ->setDecorators($default_decorator);
+							echo $title . $text;
+							break;
+						// attribut input select	
+						case 'select':
+							$select = new Zend_Form_Element_Select('value');
+							$select->setLabel('Select '. $widget['title'] . ' :')
+								   ->setDecorators($default_decorator);
+							/**
+							 * khusus uk element select
+							 * populate options select diambil dengan helper (view)
+							 * nama helper adalah attribut type
+							 * cek helper view is exists ?			
+							 */
+							$helper = $type;
+							if( !$this->helperExists($helper) ){
+								echo "Helper \"$helper\" is missing !!";
+							} else {
+								if( $type == 'menu' && $this->$helper() ){
+									foreach( $this->getMenus() as $key => $value ){
+										$select->addMultiOption($key, $value);
+									}	
+									echo $title . $select;
+								} else{
+									echo '<div class="alert alert-block portlet-message">
+									<strong>Warning!!</strong><br/>No menus have been created yet.
+									<a href="'.$this->url(array('action' => 'menus'), 'default') . '">Create menus</a>.</div>';
+								}
+							}
+							break;
+						// attribut input textarea				
+						case 'textarea':
+							$textarea = new Zend_Form_Element_Textarea('value');
+							$textarea->setAttribs(array(
+										'rows' => 5,
+										'style'=> 'width:90%'
+									 ))
+					  		     	 ->setValue($this->widget_value['value'])
+							  	 	 ->setDecorators($default_decorator);
+							echo $title . $textarea;
+							break;
+					}
+				} else {
+					// hanya tampil input title
+					echo $title;
+				}
+				?>
+				<div class="control-group">
+					<div class="alignleft" style="padding:0.5em">
+						<a class="widget-control-remove" href="#remove">Delete</a> |
+						<a class="widget-control-close" href="#close">Close</a>
+					</div>
+					<div class="alignright">
+						<img class="ajax-loader-widget" src="<?php echo $this->baseUrl() ?>/images/ajax_spin.gif"/>
+						<input type="submit" class="widget-control-save ui-button ui-widget ui-state-default ui-corner-all" value="Save" />
+					</div>
+				</div>
+				<?php 
+				/**
+				 * 
+				 * available widgets
+				 * untuk multi widget
+				 * set value $this->multiCount pada input tipe hidden class multi
+				*/
+				if( $this->forAvailable && $this->multiCount ) : ?>
+				<!-- [IMPORTANT] multi widget, set value count widget value -->
+				<input type="hidden" class="multi" name="multi" value="<?php echo $this->multiCount; ?>" />
+				<!-- [IMPORTANT] add widget, input hidden class add value TRUE -->
+				<input type="hidden" class="add" name="add" value="true" />
+				<?php endif; ?>
+			</form>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>

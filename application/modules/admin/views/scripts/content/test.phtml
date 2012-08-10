@@ -1,0 +1,16 @@
+<?php 
+$this->jQuery()
+	 ->addJavascriptFile('http://jquery.bassistance.de/treeview/lib/jquery.cookie.js')
+	 ->addJavascriptFile('http://jquery.bassistance.de/treeview/jquery.treeview.js')
+	 ->addStylesheet('http://jquery.bassistance.de/treeview/demo/screen.css')
+	 ->addStylesheet('http://jquery.bassistance.de/treeview/jquery.treeview.css')
+	 ->addOnLoad('
+		$("#content_categories").treeview({
+			persist: "cookie",
+			cookieId: "treeview-black"
+		});
+	 ');
+	 
+?>
+
+<div><?php echo $this->form; ?></div>

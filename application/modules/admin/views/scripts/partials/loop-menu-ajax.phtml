@@ -1,0 +1,38 @@
+	<div class="portlet ui-widget ui-widget-content ui-helper-clearfix">
+		<div class="portlet-header ui-widget-header ui-corner-all">
+			<a class="ui-icon ui-icon-triangle-1-s"></a>
+			<h4><?php echo ucwords($this->content_name); ?></h4>
+			<h5><?php 
+			if( $this->content_parent != 0 ) echo 'sub ';
+			echo ucwords($this->content_type); ?>
+			</h5>
+		</div>
+		<div class="portlet-inside">
+			<div class="portlet-form">
+				<div class="row">
+					<div class="inline">
+						<label>Navigation Label</label>
+						<input type="text" name="label[<?php echo $this->content_id; ?>]" value="<?php echo $this->content_name; ?>" />
+					</div>
+					<div class="inline">
+						<label>Navigation Title</label>
+						<input type="text" name="title[<?php echo $this->content_id; ?>]" value="<?php echo $this->content_name; ?>" />
+					</div>
+					<?php if( $this->content_url ) : ?>
+					<div class="single">
+						<label>URL</label>
+						<input type="text" name="url[<?php echo $this->content_id; ?>]" value="<?php echo $this->content_url; ?>" />
+					</div>
+					<?php endif; ?>
+				</div>
+						
+				<div class="row">
+					<div class="alignleft" style="margin-top: 10px;">
+						<a class="menu-control-remove" href="#remove">Delete</a>&nbsp;|&nbsp; 
+						<a class="menu-control-close" href="#close">Close</a>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>

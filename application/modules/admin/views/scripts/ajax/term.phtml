@@ -1,0 +1,25 @@
+<?php 
+if( $this->terms)  // terms (add)
+{
+	if( $this->terms ) 
+	{
+		foreach( $this->terms as $term )
+		{
+			echo $this->partial('partials/loop-term.phtml', array('data' => $term['parent']));
+			
+			foreach( $term['children'] as $child )
+			{
+				echo $this->partial('partials/loop-term.phtml', array('data' => $child )); 
+			}
+		}
+	}
+
+} elseif( $this->term )  { // single term (update)
+	echo $this->partial('partials/loop-term.phtml', array('data' => $this->term )); 
+}
+?>
+
+				
+	
+					
+	

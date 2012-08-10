@@ -1,0 +1,12 @@
+<?php if( $this->field ) : ?>
+<tr>
+	<td>
+		<input type="text" value="<?php echo $this->field['name']; ?>" disabled="disabled"/>
+		<div class="control-group">
+			<button id="update-field" class="btn">Update</button>
+			<button id="delete-field" class="btn">Delete</button>
+		</div>
+	</td>
+	<td><textarea class="full" rows="2"><?php echo $this->field['value']; ?></textarea></td>
+</tr>
+<?php endif; ?>

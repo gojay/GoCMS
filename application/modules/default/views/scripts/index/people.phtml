@@ -1,0 +1,48 @@
+<?php 
+$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/front/page.js' );
+?>
+
+<!--
+--- Ajax request, tampilkan detail
+-->
+<?php if( $this->isXmlHttpRequest ) : ?>
+	<h1 class="title bdr-btm"><?php echo ucwords($this->page->content_name); ?></h1>
+	<?php echo $this->page->content_description; ?>
+	
+	<?php if( $this->page->profile->file_type && $this->page->profile->file_name ) : ?>
+	<div class="file_<?php echo $this->page->profile->file_type; ?> bdr-top">
+		<a href="<?php echo $this->baseUrl() ?>/uploads/file/<?php echo $this->page->profile->file_name ?>">
+			You Can Download Document from Here
+		</a>
+	</div>
+	<?php endif; ?>
+	
+<?php else : ?>
+	<div class="page-left">
+		<?php if( $this->peoples ) : ?>
+		<ul id="nav-left" class="people">
+			<?php foreach( $this->peoples as $people ) : ?>
+			<li <?php if( $people->getId() == $this->page->getId()) echo 'class="active"' ?>>
+				<a href="javascript:void(0)"
+				   id="<?php echo $people->content_slug; ?>">
+					<?php echo $people->content_name ?>
+				</a>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+		<?php endif; ?>
+	</div>
+	<div id="response" class="page-right">
+		<h1 class="title bdr-btm"><?php echo ucwords($this->page->content_name); ?></h1>
+		<?php echo $this->page->content_description; ?>
+	
+		<?php if( $this->page->profile->file_type && $this->page->profile->file_name ) : ?>
+		<div class="file_<?php echo $this->page->profile->file_type; ?> bdr-top">
+			<a href="<?php echo $this->baseUrl() ?>/uploads/file/<?php echo $this->page->profile->file_name ?>">
+				You Can Download Document from Here
+			</a>
+		</div>
+		<?php endif; ?>
+		
+	</div>	
+<?php endif; ?>

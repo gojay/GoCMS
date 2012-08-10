@@ -1,0 +1,69 @@
+<!doctype html>
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	<?php 
+	$this->headLink()->appendStylesheet( $this->baseUrl() . '/css/admin/css/style.css')
+					 ->appendStylesheet( $this->baseUrl() . '/css/admin/css/colors.css')
+					 ->appendStylesheet( $this->baseUrl() . '/css/admin/css/jquery.tipsy.css');
+	echo $this->headTitle();
+	echo $this->headMeta();
+	echo $this->headLink();
+	?>
+	
+	<!-- Google WebFonts -->
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+	
+	<script src="<?php echo $this->baseUrl(); ?>/js/libs/modernizr-1.7.min.js"></script>
+</head>
+<body class="login">
+	<section role="main">
+	
+		<a href="<?php echo $this->baseUrl(false) ?>/" title="Back to Homepage"></a>
+	
+		<!-- Login box -->
+		<article id="login-box">
+		
+			<div class="article-container">
+				
+				<?php if($this->loginMessage) : ?>
+					<div class="notification error">
+						<a href="#" class="close-notification" title="Hide Notification" rel="tooltip">x</a>
+						<p><strong>Invalid</strong> <?php echo $this->loginMessage?></p>
+					</div>
+				<?php endif; ?>
+				
+				<?php echo $this->form; ?>
+			
+			</div>
+		
+		</article>
+		<!-- /Login box -->
+		<ul class="login-links">
+			<li><a href="#">Lost password?</a></li>
+			<li><a href="<?php echo $this->baseUrl(false) ?>/">Back to page</a></li>
+		</ul>
+		
+	</section>
+
+	<!-- JS Libs at the end for faster loading -->
+	<?php
+	$this->jQuery()->setLocalPath($this->baseUrl().'/js/jquery/jquery-1.7.1.min.js') // CDN: setVersion('1.5.1')
+				   ->addJavascriptFile( $this->baseUrl() . '/js/libs/selectivizr.js' )
+				   ->addJavascriptFile( $this->baseUrl() . '/js/jquery/jquery.tipsy.js' )
+				   ->addJavascriptFile( $this->baseUrl() . '/js/script.js' )
+				   ->enable();
+	echo $this->jQuery();
+	?>
+</body>
+</html>

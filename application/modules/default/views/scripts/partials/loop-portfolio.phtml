@@ -1,0 +1,8 @@
+<li>
+	<img src="<?php echo $this->baseUrl() ?>/uploads/image/<?php echo $this->image; ?>" 
+		 width="305" height="196" alt="Portfolios <?php echo $this->name; ?>" />
+	<?php echo $this->getExcerpt( $this->description, 15, '...' ); ?>
+	<div class="btn">
+		<a href="<?php echo $this->url( array('title' => $this->slug), 'portfolio' ); ?>">View Detail</a>
+	</div>
+</li>

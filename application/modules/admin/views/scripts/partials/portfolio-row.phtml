@@ -1,0 +1,67 @@
+<tr>
+	<td>
+	<input type="checkbox">
+	</td>
+	<td>
+		<img src="<?php echo $this->baseUrl() ?>/uploads/thumbnail/<?php echo $this->image; ?>" 
+			 height="60px"
+			 alt="<?php echo ucwords( $this->name ); ?>" 
+			 title="<?php echo ucwords( $this->name ); ?>" />
+	</td>
+	<td><?php echo ucwords($this -> name); ?></td>
+	<td><?php echo count($this -> gallery); ?></td>
+	<td><?php echo ($this->status == 'L') ? 'Published' : 'Draft' ; ?></td>
+	<td><?php echo $this->getDate( $this->date ); ?></td>
+	<td>
+	<ul class="actions">
+		<li>
+			<a class="view open-modal" href="#portofolio-<?php echo $this->id; ?>" title="View <?php echo $this->name ?>" rel="tooltip">view</a>
+		</li>
+		<li>
+			<a class="gallery" href="<?php echo $this->url( array( 'action' => 'gallery', 'id' =>  $this->id))  ?>" title="Add gallery <?php echo $this->name ?>" rel="tooltip">gallery</a>
+		</li>
+		<li>
+			<a class="edit" href="<?php echo $this->url( array( 'action' => 'edit', 'id' =>  $this->id))  ?>" title="Edit <?php echo $this->name ?>" rel="tooltip">edit</a>
+		</li>
+		<li>
+			<a class="delete" onclick="if (! confirm('Are you sure ?')) { return false; }"
+			href="<?php echo $this->url( array( 'action' => 'delete', 'id' =>  $this->id))  ?>" title="Delete <?php echo $this->name ?>" rel="tooltip">delete</a>
+		</li>
+	</ul></td>
+</tr>
+
+<article id="portofolio-<?php echo $this->id; ?>" class="hide full-block nested">
+	<div class="article-container">
+
+		<header>
+			<h2><?php echo ucwords($this->name); ?></h2>
+		</header>
+
+		<section>
+			<h5><?php echo $this->getDate( $this->date ); ?></h5>
+			<div class="image-frame left">
+				<img src="<?php echo $this->baseUrl() ?>/uploads/thumbnail/<?php echo $this->image; ?>" 
+					 alt="<?php echo ucwords( $this->name ); ?>" 
+					 title="<?php echo ucwords( $this->name ); ?>" />
+				<ul class="image-actions">
+					<li class="view">
+						<a href="<?php echo $this->url( array( 'action' => 'edit', 'id' =>  $this->id))  ?>">Edit</a>
+					</li>
+					<li class="delete">
+						<a href="<?php echo $this->url( array( 'action' => 'delete', 'id' =>  $this->id))  ?>" 
+							onclick="if (! confirm('Are you sure ?')) { return false; }">Delete</a>
+					</li>
+				</ul>
+			</div>
+			<?php echo $this->description; ?>
+				<div class=" aligncenter">
+					<ul class="image-gallery">
+						<?php foreach( $this->gallery as $image ) : ?>
+							<li><img src="<?php echo $this->baseUrl() ?>/uploads/thumbnail/<?php echo $image->filename; ?>"/></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+		</section>
+	</div>
+</article>
+		

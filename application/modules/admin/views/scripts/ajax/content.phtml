@@ -1,0 +1,14 @@
+<?php if( $this->permalink ) : ?>
+<div id="edit-slug-box">
+	<strong>Permalink:</strong>
+	<span id="sample-permalink"> 
+		<?php $slug = $this->permalink->content_slug; ?>
+		<?php echo $this -> baseUrl(false); ?>/<span title="Click to edit this part of the permalink" id="editable-content-slug"><?php echo $slug
+			?></span>/ </span>&lrm; <span id="edit-slug-buttons"> <a id="editPermalink" class="edit-slug btn" data-parameter="<?php echo $this->permalink->getId() ?>" href="#">Edit</a> </span>
+	<input type="hidden" name="content_slug" value="<?php echo $slug ?>" />
+</div>
+<?php elseif( $this->inlineSave ) : ?>
+<?php echo $this->partial('partials/loop-content.phtml', $this->inlineSave) ?>
+<?php elseif( $this->categories ) :
+	echo $this->categories;
+endif; ?>

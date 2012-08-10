@@ -1,0 +1,29 @@
+
+<?php if( $this->isSingle ) : ?> 
+	<div class="txt">
+		<h2 class="title"><?php echo $this->page->content_name; ?></h2>
+		<div>
+			<span><?php echo $this->getDate($this->page->content_date); ?></span>
+		</div>
+	
+		<div style="margin-top:15px;">
+			<?php echo $this->page->content_description; ?>
+		</div>
+	</div>
+<?php else : ?>
+
+	<?php echo $this->page->content_description; ?>
+
+	<?php 
+	if( $this->paginator ) 
+	{
+		
+		echo $this->partialLoop( 'partials/loop-news.phtml', $this->paginator ); 
+		
+		echo $this->paginationControl( $this->paginator, 'Sliding', 
+														  'partials/pagination-control.phtml',
+														  array( 'action' => 'news' ) ); 
+	
+	} 
+	
+endif; ?>

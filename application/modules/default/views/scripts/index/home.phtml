@@ -1,0 +1,94 @@
+	<!-- SLIDER -->
+	<?php if( $this->slides ) : ?>
+	<div id="slider">
+		<div class="slides">
+			<div class="slides_container">
+				<?php foreach( $this->slides as $slide ) :  ?>
+				<img src="<?php echo $this -> baseUrl(); ?>/uploads/image/<?php echo $slide; ?>" width="954" height="342" alt="slide" />
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+	<!-- /SLIDER -->
+	
+	<!-- PORTFOLIO -->
+	<div class="cols left">
+		<h1 class="portfolio">Our Portfolio</h1>
+
+		<div id="slider-mini">
+			<div class="slides">
+				<div id="shadow"></div>
+				<ul class="slides_container">
+					<?php foreach( $this->portfolios as $portfolio ) : ?>
+						<li>
+							<img src="<?php echo $this -> baseUrl(); ?>/uploads/image/<?php echo $portfolio->content_image ?>" alt="slide" />
+							<span>
+								<?php 
+								$link = '<a href="'.$this->url(array('title' => $portfolio->content_slug), 'portfolio').'" title="Detail '. $portfolio->content_name.'" >...Read more</a>';
+								echo $this->getExcerpt( $portfolio->content_description, 30, $link ); 
+								?>
+							</span>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /PORTFOLIO -->
+
+	<!-- CONTACT -->
+	<div class="cols mid">
+		<h1 class="contact">Contact Us</h1>
+		<?php foreach( $this->offices as $office ) : ?>
+		<ul id="contact-office">
+			<li>
+				<h2 class="title">Our Office</h2>
+			</li>
+			<li>
+				<?php echo $office['address'] ?>
+			</li>
+			<?php if( $office['email'] ) : ?>
+			<li>
+				EMAIL : <?php echo $office['email'] ?>
+			</li>
+			<?php endif; ?>
+		</ul>
+		<ul id="phone-office">
+			<li>
+				<h2 class="title">phone / fax</h2>
+			</li>
+			<li>
+				<?php echo $office['phone'] ?>
+			</li>
+			<li>
+				FAX : <?php echo $office['fax'] ?>
+			</li>
+		</ul>
+		<?php endforeach; ?>
+	</div>
+	<!-- /CONTACT -->
+	
+	<!-- NEWS -->
+	<div class="cols right">
+		<h1 class="news">Feature News</h1>
+		<?php foreach( $this->news as $news ) : ?>
+		<div class="txt">
+			<h2 class="title">
+				<a href="<?php echo $this->url(array('title' => $news->content_slug), 'news') ?>" title="<?php echo ucwords($news->content_name); ?>">
+				<?php echo ucwords($news->content_name); ?>
+				</a>
+			</h2>
+			<div>
+				<span><?php echo $this->getDate( $news->content_date ); ?></span>
+			</div>
+			<p>
+				<?php 
+				$link = '<a href="'.$this->url(array('title' => $news->content_slug), 'news').'" title="Detail '. $news->content_name.'" >...Read more</a>';
+				echo $this->getExcerpt( $news->content_description, '30', $link ); 
+				?>
+			</p>
+		</div>
+		<?php endforeach; ?>
+	</div>
+	<!-- /NEWS -->

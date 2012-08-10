@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Modal Images</title>
+	<?php 
+	$this->headLink()->appendStylesheet( $this->baseUrl() . '/assets/css/bootstrap.css')
+					 ->appendStylesheet( $this->baseUrl() . '/assets/css/bootstrap-responsive.css');
+	echo $this->headLink();
+	?>
+</head>
+<body>
+	<div class="span12" style="margin: 10px;">
+		<form id="fileupload" method="post" enctype="multipart/form-data" 
+			  action="<?php echo $this->url(array(
+				  "controller" => "blueimp", 
+				  "action" => "index", 
+				  "content" => "content", 
+				  "id" => $this->content->getId()
+			  )) ?>">
+			  
+			<?php echo $this->partial('partials/_multiple-upload.phtml', array('content' => $this->content->content_type)) ?>
+			
+		</form>
+	</div>
+
+	<!-- JS Libs at the end for faster loading -->
+	<?php 
+	// load jQuery
+	$this->jQuery()->setLocalPath( $this->baseUrl().'/assets/js/jquery.js' )
+	 		 ->addStylesheet( $this->baseUrl().'/js/blueimp/css/jquery.fileupload-ui.css' )
+		     ->addStylesheet( $this->baseUrl().'/js/blueimp/css/bootstrap.min.css' )
+		     ->addStylesheet( $this->baseUrl().'/js/blueimp/css/bootstrap-responsive.min.css' )
+		     ->addStylesheet( $this->baseUrl().'/js/blueimp/css/bootstrap-image-gallery.min.css' )
+			 ->enable();
+	echo $this->jQuery();
+	?>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?php 
+$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/tiny_mce/tiny_mce.js')
+			   ->addJavascriptFile( $this->baseUrl() . '/js/admin/editor.js')
+			   ->addOnLoad(' Editor.init({ baseUrl:"'.$this->baseUrl().'" }); '); 
+	
+// messages			
+echo $this->flashMessenger('success');
+echo $this->flashMessenger('error');
+?>
+
+<h2>Add New Page</h2>
+
+<div class="page" style="margin-top: 20px">
+	<?php echo $this->form; ?>
+</div>
+
+<?php echo $this->partial('partials/_modal.phtml', array(
+	'id' => 'modalImage', 
+	'attribs' => 'style=width:650px;'
+)) ?>

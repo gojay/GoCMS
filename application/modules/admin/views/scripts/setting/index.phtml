@@ -1,0 +1,60 @@
+<?php 
+$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/jquery/jquery.animate_from_to-1.0.js')
+			   ->addJavascriptFile( $this->baseUrl() . '/js/admin/option.js' ); 
+?>
+
+<header>
+	<h2>Settings</h2>
+</header>
+
+<section>
+
+<?php 
+// messages
+echo $this->flashMessenger('success'); 
+echo $this->flashMessenger('error'); 
+?>
+
+<!-- navigation option -->
+<div class="tabbable tabs-left">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a data-toggle="tab" href="#sidetab-option-general">General</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#sidetab-option-contact">Contact</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#sidetab-option-social">Social</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#sidetab-option-profile">Profile</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<!-- sidetab option general -->
+		<div id="sidetab-option-general" class="tab-pane active">
+			<p>General</p>
+		</div>
+		
+		<!-- sidetab option contact -->
+		<div id="sidetab-option-contact" class="tab-pane">
+			<p>Contact</p>
+		</div>
+		
+		<!-- sidetab option social -->
+		<div id="sidetab-option-social" class="tab-pane">
+			<p>Social</p>
+		</div>
+		
+		<!-- sidetab option profile -->
+		<div id="sidetab-option-profile" class="tab-pane">
+			<p>Profile</p>
+		</div>
+	</div>
+</div>
+
+	<div id="ajax-loader">
+		<div class="ajax-loading">Please wait...</div>
+	</div>
+

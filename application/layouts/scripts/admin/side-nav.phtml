@@ -1,0 +1,263 @@
+<?php
+$menu = array(
+	array(
+		'beforeText' => '<i class="icon-home"></i>',
+        'label' => 'Dashboard', 
+		'route' => 'admin',
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'order' => 5
+	),
+	array(
+		'beforeText' => '<i class="icon-file"></i>',
+		'label' => 'Posts',
+		'uri' => '#sub-posts',
+        'ulAttrbs' => array( 
+            'id' => 'sub-posts',
+            'class' => 'collapse',
+        ),
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'data' => array(
+			'data-toggle' => 'collapse'
+		),
+        'order' => 2,
+		'pages' => array(
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'All Posts',
+				'params' => array(
+					'type' => 'post'
+				),
+				'route' => 'contents',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Add Post',
+				'action' => 'add',
+				'params' => array(
+					'type' => 'post'
+				),
+				'route' => 'content',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Categories',
+				'action' => 'term',
+				'params' => array(
+					'type' => 'category'
+				),
+				'route' => 'content',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Tags',
+				'action' => 'term',
+				'params' => array(
+					'type' => 'tag'
+				),
+				'route' => 'content',
+			)
+		)
+	),
+	array(
+		'beforeText' => '<i class="icon-book"></i>',
+		'label' => 'Pages',
+		'uri' => '#sub-pages',
+        'ulAttrbs' => array( 
+            'id' => 'sub-pages',
+            'class' => 'collapse',
+        ),
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'data' => array(
+			'data-toggle' => 'collapse'
+		),
+        'order' => 3,
+		'pages' => array(
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'All Pages',
+				'params' => array(
+					'type' => 'page'
+				),
+				'route' => 'contents',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Add Page',
+				'action' => 'add',
+				'params' => array(
+					'type' => 'page'
+				),
+				'route' => 'content',
+			)
+		)
+	),
+	// CUSTOM CONTENTS
+	array(
+		'beforeText' => '<i class="icon-file"></i>',
+		'label' => 'Products',
+		'uri' => '#sub-products',
+        'ulAttrbs' => array( 
+            'id' => 'sub-products',
+            'class' => 'collapse',
+        ),
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'data' => array(
+			'data-toggle' => 'collapse'
+		),
+        'order' => 4,
+		'pages' => array(
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'All Products',
+				'params' => array(
+					'type' => 'product'
+				),
+				'route' => 'contents',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Add Post',
+				'action' => 'add',
+				'params' => array(
+					'type' => 'post'
+				),
+				'route' => 'content',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Categories',
+				'action' => 'term',
+				'params' => array(
+					'type' => 'product'
+				),
+				'route' => 'content',
+			)
+		)
+	),
+	array(
+		'beforeText' => '<i class="icon-file"></i>',
+		'label' => 'Portfolios',
+		'uri' => '#sub-portfolios',
+        'ulAttrbs' => array( 
+            'id' => 'sub-portfolios',
+            'class' => 'collapse',
+        ),
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'data' => array(
+			'data-toggle' => 'collapse'
+		),
+        'order' => 1,
+		'pages' => array(
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'All Portfolios',
+				'params' => array(
+					'type' => 'portfolio'
+				),
+				'route' => 'contents',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Add Portfolio',
+				'action' => 'add',
+				'params' => array(
+					'type' => 'portfolio'
+				),
+				'route' => 'content',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Categories',
+				'action' => 'term',
+				'params' => array(
+					'type' => 'portfolio'
+				),
+				'route' => 'content',
+			)
+		)
+	),
+	// END CUSTOM CONTENTS
+	array(
+		'beforeText' => '<i class="icon-list-alt"></i>',
+		'label' => 'Appearance',
+		'uri' => '#sub-appearance',
+        'ulAttrbs' => array( 
+            'id' => 'sub-appearance',
+            'class' => 'collapse',
+        ),
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'data' => array(
+			'data-toggle' => 'collapse'
+		),
+        'order' => 6,
+		'pages' => array(
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Widgets',
+				'controller' => 'appearance',
+				'action' => 'widgets',
+				'module' => 'admin',
+				'route' => 'default',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Menus',
+				'controller' => 'appearance',
+				'action' => 'menus',
+				'module' => 'admin',
+				'route' => 'default',
+			),
+		)
+	),
+	array(
+		'beforeText' => '<i class="icon-cog"></i>',
+		'label' => 'Settings',
+		'uri' => '#sub-settings',
+        'ulAttrbs' => array( 
+            'id' => 'sub-settings',
+            'class' => 'collapse',
+        ),
+        'liAttrbs' => array( 
+            'class' => 'nav-header'
+        ),
+        'data' => array(
+			'data-toggle' => 'collapse'
+		),
+        'order' => 7,
+		'pages' => array(
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'General',
+				'controller' => 'setting',
+				'module' => 'admin',
+				'route' => 'default',
+			),
+			array(
+				'beforeText' => '<i class="icon-minus"></i>',
+				'label' => 'Options',
+				'controller' => 'setting',
+				'action' => 'option',
+				'module' => 'admin',
+				'route' => 'default',
+			),
+		)
+	)
+);
+$container = new Zend_Navigation($menu);
+$navigation = $this->navigationBootstrap($container)->setUlId('menu-navigation')->setUlClass('nav nav-list');
+//$navigation = $this->view->navigation($container);
+	
+echo $navigation->render();
+?>

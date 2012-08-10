@@ -1,0 +1,51 @@
+<?php 
+$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/admin/quick-edit.js')
+			   ->addOnLoad(' QuickEdit.init({ ajaxurl:"'. $this->baseUrl( FALSE ).'/admin/ajax/content" }); '); 
+// messages			
+echo $this->flashMessenger('success');
+echo $this->flashMessenger('error');
+?>
+
+	<h2>
+		<?php echo $this->getTitle(); ?>
+		<a class="btn btn-primary" href="<?php echo $this->url(array(
+			'action' => 'add', 
+			'type' => $this->content_type), 'content'); ?>">Add New</a>
+	</h2>
+	
+	<table class="table table-condensed table-striped" style="margin:10px 0;">
+		<thead>
+			<tr class="well">
+				<th class="half">Title</th>
+				<th>Date</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php 
+			if( count($this->paginator) ) :
+				foreach($this->paginator as $content) 
+				{
+					echo $this->partial('partials/loop-content.phtml', $content['parent']); 
+		
+					foreach($content['children'] as $child) {
+						echo $this->partial('partials/loop-content.phtml', $child);
+					}
+				}
+				echo $this->paginationControl( $this->paginator, 'Sliding', 'partials/_pagination-control.phtml', array('route' => 'pagination_contents')); 
+			else : ?>
+				<tr>
+					<td colspan="3">
+						<div class="alert">
+					    	<i class="icon-exclamation-sign"></i>
+					    	<strong>No Data Results</strong>
+					    </div>
+					</td>
+				</tr>
+			<?php endif; ?>
+		</tbody>
+	</table>
+
+<!-- quick edit -->
+<?php echo $this->partial('partials/_quick-edit.phtml', array( 'pages' => $this->pages )); ?>
+<!-- /quick edit -->

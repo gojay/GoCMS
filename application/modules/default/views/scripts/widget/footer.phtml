@@ -1,0 +1,77 @@
+<?php 
+switch ( $this->position ) 
+{
+	case 'left': ?>
+		<ul id="company">
+           	<li><h1>company</h1></li>
+			<?php if( $this->page['About Us'] ) : ?>
+            	<li><a href="<?php echo $this->url(array(), $this->page['About Us']['slug']); ?>">About Us</a></li>
+               	<?php foreach( $this->page['About Us']['child'] as $about ) : ?>
+                	<li><a href="<?php echo $this->url(array('title' => $about['content_slug']), $this->page['About Us']['slug']); ?>"><?php echo $about['content_name'] ?></a></li>
+        		<?php endforeach; ?>
+        	<?php endif; ?>
+        </ul>
+		<?php break; 
+		
+	case 'mid_left': ?>
+		<ul id="services">
+           	<li>
+           		<h1>Services</h1>
+           	</li>
+			<?php if( $this->page['Services'] ) : ?>
+               	<?php foreach( $this->page['Services']['child'] as $service ) : ?>
+                <li>
+                	<a href="<?php echo $this->url(array('title' => $service['content_slug']), $this->page['Services']['slug']); ?>">
+                		<?php echo $service['content_name'] ?>
+                	</a>
+                </li>
+                <?php endforeach; ?>
+         	<?php endif; ?>
+        </ul>
+		<?php break; 
+		
+	case 'mid_right': ?>
+		<?php if( $this->offices ) : ?>
+			<?php foreach( $this->offices as $office ) : ?>
+			<ul id="our-office">
+				<li>
+					<h1>Our Office</h1>
+				</li>
+				<li>
+					<?php echo $office['address'] ?>
+				</li>
+				<?php if( $office['email'] ) : ?>
+				<li>
+					EMAIL : <?php echo $office['email'] ?>
+				</li>
+				<?php endif; ?>
+			</ul>
+			<ul id="phone">
+				<li>
+					<h2 class="title">phone / fax</h2>
+				</li>
+				<li>
+					<?php echo $office['phone'] ?>
+				</li>
+				<li>
+					FAX : <?php echo $office['fax'] ?>
+				</li>
+			</ul>
+			<?php endforeach; ?>
+   		<?php endif; ?>
+		<?php break; 
+	
+	case 'right': ?>
+			<ul id="click">
+                <li><h1>click and connect</h1></li>
+           		<li><a href="<?php echo $this->baseUrl(false) ?>/rss"><img src="<?php echo $this->baseUrl(); ?>/images/rss.png" alt="rss" width="32" height="32" /></a></li>
+                <?php if( $this->social ) : ?>
+                <li><a href="<?php echo $this->social['linkedin']; ?>"><img src="<?php echo $this->baseUrl(); ?>/images/linkedin.png" alt="linkedin" width="32" height="32" /></a></li>
+                <li><a href="<?php echo $this->social['facebook']; ?>"><img src="<?php echo $this->baseUrl(); ?>/images/facebook.png" alt="facebook" width="32" height="32" /></a></li>
+                <li><a href="<?php echo $this->social['twitter']; ?>"><img src="<?php echo $this->baseUrl(); ?>/images/twitter.png" alt="twitter" width="32" height="32" /></a></li>
+            	<?php endif; ?>
+            </ul>
+		<?php break; 
+} 
+
+?>

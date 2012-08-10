@@ -1,0 +1,55 @@
+<?php 
+$this->jQuery()->addJavascriptFile( $this->baseUrl() . '/js/admin/quick-edit.js')
+			   ->addOnLoad(' QuickEdit.init({ ajaxurl:"'. $this->baseUrl( FALSE ).'/admin/ajax/content" }); '); 
+	
+// messages			
+echo $this -> flashMessenger('success');
+echo $this -> flashMessenger('error');
+?>
+
+	<h2>
+		Pages
+		<a class="btn btn-primary" href="<?php echo $this->baseUrl(false) ?>/admin/pages/add">Add New</a>
+	</h2>
+	
+	<table class="table table-condensed table-striped" style="margin:10px 0;">
+		<thead>
+			<tr class="well">
+				<th class="half">Title</th>
+				<th>Date</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if( $this->data ) : ?>
+				<!-- looping -->
+				<?php foreach($this->data as $data) : ?>
+	
+					<!-- Looping Parent -->
+					<?php echo $this->partial('partials/loop-content.phtml', array('data' => $data['parent'], 'parent' => true)) ?>
+					<!-- /Looping Parent -->
+		
+					<!-- Looping Child -->
+					<?php foreach($data['children'] as $child) : ?>
+						<?php echo $this->partial('partials/loop-content.phtml', array('data' => $child, 'parent' => false)) ?>
+					<?php endforeach; ?>
+					<!-- /Looping Child -->
+	
+				<?php endforeach; ?><!-- /looping -->
+				
+			<?php else : ?>
+				<tr>
+					<td colspan="3">
+						<div class="alert alert-block">
+							<strong>Page is Empty</strong>
+							Please <a href="<?php echo $this->baseUrl(false) ?>/admin/pages/add" class="btn btn-primary">add some new page</a>
+						</div>
+					</td>
+				</tr>
+			<?php endif; ?>
+		</tbody>
+	</table>
+
+<!-- quick edit -->
+<?php echo $this->partial('partials/_quick-edit.phtml', array( 'pages' => $this->pages )); ?>
+<!-- /quick edit -->

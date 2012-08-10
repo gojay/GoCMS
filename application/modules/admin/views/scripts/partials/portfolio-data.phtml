@@ -1,0 +1,12 @@
+<tr>
+	<td>
+		<img src="<?php echo $this->baseUrl() ?>/uploads/thumbnail/<?php echo $this->content_image; ?>"
+			 height="60px" 
+			 alt="<?php echo ucwords( $this->content_name ); ?>" 
+			 title="<?php echo ucwords( $this->content_name ); ?>" />
+	</td>
+	<td><?php echo ucwords( $this->content_name ); ?></td>
+	<td><?php echo ($this->content_status == 'L') ? 'Published' : 'Draft' ; ?></td>
+	<td><?php echo $this->getDate( $this->content_date ); ?></td>
+</tr>
+

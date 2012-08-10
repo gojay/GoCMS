@@ -1,0 +1,66 @@
+<tr>
+	<td>
+	<input type="checkbox">
+	</td>
+	<td><!-- Table actions --><a class="toggle-table-switch" href="#" title="Show options" rel="tooltip">Options</a>
+	<ul class="table-switch">
+		<li>
+			<a href="<?php echo $this->url( array( 'action' => 'view', 'id' =>  $this->gallery_id ))  ?>" >view</a>
+		</li>
+		<li>
+			<a href="<?php echo $this->url( array( 'action' => 'edit', 'id' =>  $this->gallery_id))  ?>">edit</a>
+		</li>
+		<li>
+			<a href="<?php echo $this->url( array( 'action' => 'delete', 'id' =>  $this->gallery_id))  ?>">delete</a>
+		</li>
+	</ul><!-- /Table actions --></td>
+	<td><img src="<?php echo $this->baseUrl() . '/uploads/thumbnail/' . $this->image ?>" 
+			 width="64px"
+			 alt="<?php echo $this->name ?>" title="Image <?php echo $this->name ?>" /></td>
+	<td><?php echo ucwords( $this->name ); ?></td>
+	<td align="center">
+		<ul class="actions">
+			<li>
+				<a class="view open-modal" href="#gallery-<?php echo $this->gallery_id; ?>" title="View <?php echo $this->name ?>" rel="tooltip">view</a>
+			</li>
+			<li>
+				<a class="edit" href="<?php echo $this->url( array( 'action' => 'update', 'id' =>  $this->gallery_id ))  ?>" title="Edit <?php echo $this->name ?>" rel="tooltip">edit</a>
+			</li>
+			<li>
+				<a class="delete" onclick="if (! confirm('Are you sure ?')) { return false; }"
+				href="<?php echo $this->url( array( 'action' => 'delete', 'id' =>  $this->gallery_id ))?>" 
+				title="Delete <?php echo $this->name ?>" rel="tooltip">delete</a>
+			</li>
+		</ul>
+	</td>
+</tr>
+
+
+<article id="gallery-<?php echo $this->gallery_id; ?>" class="hide full-block nested">
+	<div class="article-container">
+
+		<header>
+			<h2><?php echo ucwords($this->name); ?></h2>
+		</header>
+
+		<section>
+			<?php echo $this->description; ?>
+			<!-- Image Minimenu Actions -->
+			<div class="image-frame right">
+				<img src="<?php echo $this->baseUrl() . '/uploads/thumbnail/' . $this->image ?>" 
+				 alt="<?php echo $this->name ?>" title="Image <?php echo $this->name ?>" />
+				<ul class="image-actions">
+					<li class="view">
+						<a href="<?php echo $this->url( array( 'action' => 'update', 'id' =>  $this->gallery_id )) ?>">Edit</a>
+					</li>
+					<li class="delete">
+						<a href="<?php echo $this->url( array( 'action' => 'delete', 'id' =>  $this->gallery_id )) ?>
+							 onclick="if (! confirm('Are you sure ?')) { return false; }"
+							">Delete</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /Image Minimenu Actions -->
+		</section>
+	</div>
+</article>

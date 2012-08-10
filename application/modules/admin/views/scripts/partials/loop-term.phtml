@@ -1,0 +1,29 @@
+<tr id="term-<?php echo $this->data['term_id']; ?>">
+	<td></td>
+	<td>
+		<strong>
+		<a href="#" class="quickEdit">
+			<?php 
+			if( $this->data['term_parent'] ) {
+				echo '&mdash;&nbsp;';
+			}
+			echo ucwords($this->data['term_name']); ?>
+		</a>
+		</strong>
+		<div id="inline_<?php echo $this->data['term_id']; ?>" class="hide">
+			<?php foreach( $this->data as $k => $v ) : ?>
+				<div class="<?php echo $k; ?>"><?php echo $v; ?></div>
+			<?php endforeach; ?>
+		</div>
+	</td>
+	<td><?php echo $this->data['term_description']; ?></td>
+	<td><?php echo $this->data['term_slug']; ?></td>
+	<td class="center"><?php echo $this->data['term_count']; ?></td>
+	<td>
+		<div class="btn-group">
+			<a href="#" class="btn quickEdit" rel="tooltip" title="Quick Edit"><i class="icon-pencil"></i></a>
+			<a href="#" class="btn quickDelete" rel="tooltip" data-parameter="<?php echo $this->data['term_id']; ?>" title="Delete"><i class="icon-ban-circle"></i></a>
+			<img class="ajax-loader hide" src="<?php echo $this->baseUrl() ?>/images/ajax_spin.gif" style="padding-top: 5px; padding-left: 10px" />
+		</div>
+	</td>
+</tr>

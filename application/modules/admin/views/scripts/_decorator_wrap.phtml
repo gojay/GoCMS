@@ -1,0 +1,10 @@
+<?php if( $this->openOnly ) : ?>
+<div class="portlet">
+	<div class="portlet-header">
+		<h3><?php echo $this->title ?></h3>
+	</div>
+	<div class="portlet-inside">
+<?php elseif( $this->closeOnly ) : ?>
+	</div>
+</div>
+<?php endif ?>

@@ -1,0 +1,104 @@
+<header>
+	<h2>Peoples</h2>
+</header>
+
+<section>
+
+<div class="clearfix" style="margin-bottom: 20px;">
+	<a class="button" href="<?php echo $this->baseUrl(false) ?>/admin/people/add">Add People</a>
+</div>
+
+<?php 
+// messages
+echo $this->flashMessenger('success'); 
+echo $this->flashMessenger('error'); 
+?>
+
+<div class="sidetabs">
+	<nav class="sidetab-switch">
+		<ul>
+			<li>
+				<a class="default-sidetab" href="#sidetab-news-action">Action</a>
+			</li>
+			<li>
+				<a href="#sidetab-news-data">Search</a>
+			</li>
+		</ul>
+	</nav>
+	
+	<div class="sidetab default-sidetab" id="sidetab-news-action">
+		<!-- action galleries -->
+		<form class="table-form">
+			<table>
+				<thead>
+					<tr>
+						<th>
+						<input type="checkbox" class="check-all">
+						</th>
+						<th>Title</th>
+						<th>Status</th>
+						<th>Date</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<?php if( count($this->paginator) ) : ?>
+				<tbody>
+					<!-- Row -->
+					<?php  echo $this->partialLoop( 'partials/people-row.phtml', $this->paginator ); ?>
+				</tbody>
+				<tfoot>
+					<!-- Pagination -->
+					<?php echo $this->paginationControl( $this->paginator, 'Sliding', 
+														 'partials/pagination-control.phtml'); ?>
+				</tfoot>
+				<?php else : ?>
+				<tbody>
+					<tr>
+						<td colspan="5">
+							<div class="notification attention">
+								<p>
+								<strong>People is Empty</strong>
+								Please <a href="<?php echo $this->baseUrl(false) ?>/admin/people/add">add some new people</a>
+								</p>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<?php endif; ?>	
+			</table>
+		</form>
+	</div>
+	
+	<div class="sidetab" id="sidetab-news-data">
+		<!-- data galleries -->
+		<table class="datatable" width="70%">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Status</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<?php if( count($this->data) ) : ?>
+			<tbody>
+				<!-- Row -->
+				<?php  echo $this->partialLoop( 'partials/people-data.phtml', $this->data ); ?>
+			</tbody>
+			<?php endif; ?>	
+			<tfoot>
+				<tr>
+					<th>Image</th>
+					<th>Title</th>
+					<th>Status</th>
+					<th>Date</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+</section>
+
+
+
+	

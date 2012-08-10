@@ -1,0 +1,40 @@
+<?php
+if ($this->pageCount > 1) : ?>
+
+	<tr>
+		<td colspan="8">
+			<ul class="pagination">
+				<!-- FIRST -->
+				<li>
+					<a class="button gray" href="<?php echo $this->url( array( 'page' => $this->first )); ?>">&laquo; first</a>
+				</li>
+		
+				<!-- PREVIOUS -->
+				<li>
+					<a class="button gray" href="<?php echo $this->url( array( 'page' => $this->previous )); ?>">&laquo; previous</a>
+				</li>
+				
+				<!-- NUMBERS -->
+				<?php foreach($this->pagesInRange as $page) : ?>
+				<li>
+					<a class="button <?php if ($page != $this->current) : ?>gray<?php endif; ?>" 
+						href="<?php echo $this->url( array( 'page' => $page )); ?>">
+						<?php echo $page; ?>
+					</a>
+				</li>		
+				<?php endforeach; ?>
+				<!-- NEXT -->
+				<li>
+					<a class="button gray" href="<?php echo $this->url( array( 'page' => $this->next )); ?>">next &gt;</a>
+				</li>
+		
+				<!-- LAST -->
+				<li>
+					<a class="button gray" href="<?php echo $this->url( array( 'page' => $this->last )); ?>">last &raquo;</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+
+<?php endif; ?>

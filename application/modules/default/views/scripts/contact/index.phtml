@@ -1,0 +1,54 @@
+<?php 
+/*$this->jQuery()->addJavascriptFile('http://maps.google.com/maps?file=api&amp;v=2&amp;key='. $this->googleMapsKey .'&sensor=false'); 
+$this->jQuery()->addOnLoad('
+	if (GBrowserIsCompatible())
+	 {
+        var map = new GMap2(document.getElementById("map_canvas"));
+		
+		var latlng = new GLatLng('. $this->contact['latitude'] .', '. $this->contact['longtitude'] .');
+		
+		// base icon
+        var baseIcon = new GIcon(G_DEFAULT_ICON);
+        baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+        baseIcon.iconSize = new GSize(20, 34);
+        baseIcon.shadowSize = new GSize(37, 34);
+        baseIcon.iconAnchor = new GPoint(9, 34);
+        baseIcon.infoWindowAnchor = new GPoint(9, 2);
+
+		// marker
+		var letteredIcon = new GIcon(baseIcon);
+        letteredIcon.image = "http://www.google.com/mapfiles/marker.png";
+        markerOptions = { icon:letteredIcon };
+        var marker = new GMarker( latlng, markerOptions );
+		
+		// map
+       	map.setCenter( latlng, 15 );
+        map.setUIToDefault();
+		map.addOverlay( marker );
+
+      }
+');  */ 
+?>
+
+<h1 class="title bdr-btm">
+	Contact
+</h1>
+
+<div class="txt">
+	<?php echo $this->page->content_description; ?>	
+</div>
+
+<div class="txt">
+	<?php if($this->messageProcessed && $this->sendError) : ?>
+		<p><?php echo $this->translate('Sorry there was an error sending your message'); ?></p>
+	<?php elseif($this->messageProcessed && !$this->sendError) : ?>
+		<p><?php echo $this->translate('Thank you for contact us. We will be in tocuh soon'); ?></p>
+	<?php else : ?>
+		<p><?php echo $this->translate('To send us a message please complete the form below and click Submit →'); ?></p>
+	<?php endif; ?>
+	<?php echo $this->form; ?>
+</div>
+
+<div class="row">
+	<div id="map_canvas" class="map"></div>
+</div>

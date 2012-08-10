@@ -1,0 +1,33 @@
+<tr id="content-<?php echo $this->content_id; ?>" class="<?php echo $this->content_type; ?>">
+	<td><strong>
+		<a href="<?php echo $this->url(array('action' => 'edit', 'type' => $this->content_type, 'id' => $this->content_id), 'content'); ?>">
+			<?php if( !$this->content_parent ): 
+				echo ucwords($this->content_name); 
+			else : ?>
+				&nbsp;&mdash;&nbsp;<?php echo ucwords($this->content_name); ?>
+			<?php endif; 
+			if( $this->content_status == 'D' ) echo '&nbsp;&mdash;&nbsp;Draft' ?>
+		</a></strong>
+		<div id="inline_<?php echo $this->content_id; ?>" class="hide">
+			<div class="content_name"><?php echo ucwords($this->content_name); ?></div>
+			<div class="content_slug"><?php echo $this->content_slug ?></div>
+			<!-- TERMS -->
+			<?php if( $this->content_type != 'page' ) : ?>
+			<div class="content_category"><?php echo (is_array($this->content_categories)) ? join(',', $this->content_categories) : $this->content_categories; ?></div>
+			<div class="content_tags"><?php echo(is_array($this->content_tags)) ? join(',', $this->content_tags) : $this->content_tags; ?></div>
+			<!-- PARENT & ORDER -->
+			<?php elseif( $this->content_type != 'post' ) : ?>
+			<div class="content_parent"><?php echo $this->content_parent ?></div>
+			<div class="content_order"><?php echo $this->content_order ?></div>
+			<?php endif; ?>
+			<div class="content_status"><?php echo $this->content_status ?></div>
+		</div>
+	</td>
+	<td><?php echo $this->getDate($this->content_date); ?></td>
+	<td>
+	<div class="btn-group">
+		<a href="#" class="btn quickEdit" rel="tooltip" title="Quick Edit"><i class="icon-pencil"></i></a>
+		<a href="<?php echo $this->url(array('action' => 'edit', 'type' => $this->content_type, 'id' => $this->content_id), 'content'); ?>" class="btn" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
+		<a onclick="if (! confirm('Are you sure ?')) { return false; }" href="<?php echo $this->url(array('action' => 'delete', 'type' => $this->content_type, 'id' => $this->content_id), 'content'); ?>" class="btn" rel="tooltip" title="Delete"><i class="icon-ban-circle"></i></a>
+	</div></td>
+</tr>

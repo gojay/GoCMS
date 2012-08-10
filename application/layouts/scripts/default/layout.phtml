@@ -1,0 +1,105 @@
+<?php 
+echo $this->docType(); 
+$this->layout()->slider = $this->action( 'slider', 'widget', 'default' );
+$this->layout()->widget_footer_left = $this->action( 'footer', 'widget', 'default', array( 'position' => 'left' ) ); 
+$this->layout()->widget_footer_mid_left = $this->action( 'footer', 'widget', 'default', array( 'position' => 'mid_left' ) ); 
+$this->layout()->widget_footer_mid_right = $this->action( 'footer', 'widget', 'default', array( 'position' => 'mid_right' ) ); 
+$this->layout()->widget_footer_right = $this->action( 'footer', 'widget', 'default', array( 'position' => 'right' ) ); 
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php 
+	// load front style
+	$this->loadStyle( 'front' );
+	echo $this->headTitle();
+	echo $this->headMeta();
+	echo $this->headLink();
+	// load jQuery & JS Files
+	$this->jQuery()->setLocalPath( $this->baseUrl().'/js/jquery/jquery-1.7.1.min.js' ) // CDN: setVersion('1.7.1')
+				   ->addJavascriptFile( $this->baseUrl() . '/js/front/slides.min.jquery.js' )
+				   ->uiEnable();
+	$this->jQuery()->addOnLoad("
+		$('.slides').slides({
+				play: 5000,
+				pause: 2500,
+                generateNextPrev: true
+		});
+	");
+	echo $this->jQuery();
+?>
+</head>
+
+<body>
+<div id="logo">
+	<div class="content">
+        <img src="<?php echo $this->baseUrl(); ?>/images/logo.png" alt="logo" /></div>
+    </div>
+    <div class="clear"></div>
+<!-- MENU -->   
+<div id="menu">
+	<div class="content">
+    	<?php //echo $this->layout()->menu; ?>
+		<?php echo $this->navigation()->menu()->setMaxDepth(1)->setUlClass('nav'); ?>
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- /MENU --> 
+<!-- BREADCRUMB -->
+<?php if( $this->param != 'home' ) : ?>
+<div id="breadcumb">
+	<div class="content">
+    	<?php echo $this->navigation()->breadcrumbs()->setLinkLast(false)->setMinDepth(0)->setPartial(array('partials/breadcrumbs.phtml','default')); ?>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+ <!-- /BREADCRUMB -->
+<?php endif; ?>
+<div id="main">
+    <!-- CONTENT HERE -->
+	<div class="content">
+		<div id="mainpage">
+			<?php echo $this->layout()->content; ?>
+			<div class="clear"></div>
+		</div>
+    </div>
+    <!-- /CONTENT HERE -->
+    <div class="clear"></div>
+</div>
+<div id="footer">
+	<!-- FOOTER HERE -->
+	<div class="content">
+		<!-- footer left -->
+        <div class="cols-fot left">
+			<?php echo $this->layout()->widget_footer_left; ?>
+        </div>
+		<!-- /footer left -->
+        
+		<!-- footer mid_left -->
+        <div class="cols-fot mid">
+			<?php echo $this->layout()->widget_footer_mid_left; ?>
+        </div>
+		<!-- /footer mid_left -->
+        
+		<!-- footer mid_right -->
+        <div class="cols-fot mid">
+			<?php echo $this->layout()->widget_footer_mid_right; ?>
+        </div>
+		<!-- /footer mid_right -->
+        
+		<!-- footer right -->
+        <div class="cols-fot right">
+			<?php echo $this->layout()->widget_footer_right; ?>
+        </div>
+		<!-- /footer right -->
+    </div>
+	<!-- /FOOTER HERE -->
+    <div class="clear"></div>
+</div>
+<div id="footer-copyright">
+	<div class="content">©  2012 . All rights reserved.</div>
+    <div class="clear"></div>
+</div>
+</body>
+</html>
